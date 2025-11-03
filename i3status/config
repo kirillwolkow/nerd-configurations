@@ -1,0 +1,62 @@
+general {
+    output_format = "i3bar"
+    colors = true
+    interval = 5
+}
+
+# --- ORDER OF ITEMS ---
+order += "wireless"
+order += "ethernet"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "memory"
+order += "disk /"
+order += "battery 0"
+order += "volume master"
+order += "tztime local"
+
+# --- NETWORK ---
+wireless eth0 {
+    format_up = "  %quality%% %essid"
+    format_down = "睊  down"
+}
+
+ethernet wlp0s20f3 {
+    format_up = " %ip"
+    format_down = "睊  down"
+}
+
+# --- SYSTEM ---
+cpu_usage {
+    format = " %usage"
+}
+
+cpu_temperature 0 {
+    format = " %degrees°C"
+    path = "/sys/class/thermal/thermal_zone0/temp"
+}
+
+memory {
+    format = " %used / %total"
+    threshold_degraded = "10%"
+    format_degraded = "RAM: %used"
+}
+
+disk "/" {
+    format = " %avail"
+}
+
+battery 0 {
+    path = "/sys/class/power_supply/BAT1/uevent"
+    format = " %percentage"
+}
+
+volume master {
+    format = " %volume"
+    format_muted = " muted"
+}
+
+# --- DATE & TIME ---
+tztime local {
+    format = " %Y-%m-%d   %H:%M"
+}
